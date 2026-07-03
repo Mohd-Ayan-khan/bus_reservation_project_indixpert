@@ -10,14 +10,14 @@ char destination[10][30]={"ajmer","udaipur","bikaner","pali","nagor","jodhpur","
 int avalible[10];
 int tag=0;
 int fare[10]={100,150,200,250,300,120,310,190,340,220};
-void login();
-void booking_menu();
-void book();
-void status();
-void cencle();
-void route();
-void signup();
-void payment();
+int  login();
+int  booking_menu();
+int book();
+int status();
+int cencle();
+int route();
+int signup();
+int payment();
 
 
 
@@ -71,7 +71,7 @@ int main()
 return 0;
 }
 
-void signup()
+int signup()
 {
     printf("Enter User Name :");
     scanf("%s",&username);
@@ -82,9 +82,10 @@ void signup()
     printf("\n\t\t*****Sign Up Complete*****");
     printf("\n\t**************************************\n");
     tag=1;
+  return 0;  
 }
 
-void login()
+int login()
 {
     
     char user[20];
@@ -150,10 +151,11 @@ void login()
         
 
     }while(try==1);
+    return 0;
 }
 
 
-void booking_menu()
+int booking_menu()
 {
     int choice;
 do{
@@ -210,10 +212,11 @@ do{
         break;
     }
 }while(choice != 4);
+return 0;
 }
 
 
-void book()
+int book()
 {
     
     do{
@@ -244,10 +247,10 @@ void book()
     }while(seats[num] > 50 && busnum[num]<1 || busnum[num]>10); 
         
         
-    
+ return 0;   
 }
 
-void cencle()
+int cencle()
 {
     int cencle;
     int comp;
@@ -285,12 +288,12 @@ void cencle()
         printf("\n\t\tthis bus or Seats not booked");
         printf("\n\t**************************************\n");
     }
-    
+   return 0; 
 }
 
 
 
-void status()
+int status()
 {
     int check;
     int index;
@@ -334,10 +337,10 @@ void status()
             printf("\n\t**************************************\n");
 
         }
-    
+    return 0;
 }
 
-void route()
+int route()
 {
     printf("---------------------------------------------\n");
     printf("| Bus no.| source city | destination | Amount |\n");
@@ -349,10 +352,10 @@ void route()
         printf("|   %-2d   |  %-10s |  %-10s |  Rs.%d|\n",i+1,source_city[i],destination[i],fare[i]);
 
     }
-    
+return 0;    
 }
 
-void payment()
+int payment()
 {
     int index=0;
     int option;
@@ -419,7 +422,7 @@ void payment()
     }
 
 
-
+return 0;
 }
 
 
