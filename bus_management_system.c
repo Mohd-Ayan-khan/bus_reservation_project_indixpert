@@ -26,7 +26,7 @@ int main()
     int choice;
    
     
-    while(choice != 2)
+    while(choice != 3)
  {
     printf("\n#####################################################");
     printf("\n*********** BUS RESERVATION SYSTEM *************");
@@ -54,7 +54,7 @@ int main()
     case 2: 
 
         login();
-        choice=2;
+        
         
         break; 
         
@@ -303,12 +303,7 @@ int status()
     printf("enter bus number :");
     scanf("%d",&check);
 
-    if(num == 0)
-    {
-        printf("\n\t**************************************");
-        printf("\n\t****** No Bus Booked *******");
-        printf("\n\t**************************************\n");
-    }
+   
 
 
     for(int i=0; i<num; i++)
@@ -328,15 +323,22 @@ int status()
             printf("\n**********************************\n");
             
             break;
-        } 
-    }
-        if(tag2 == 0)
-        {
-            printf("\n\t**************************************");
-            printf("\n\t\t****this bus you not book****");
-            printf("\n\t**************************************\n");
-
         }
+        
+    }
+     if(num == 0)
+    {
+        printf("\n**********************************\n");
+        printf(" Bus number  :       %d\n ",check);
+        printf("source city :       %s\n ",source_city[check-1]);
+        printf("destination :       %s\n ",destination[check-1]);
+        printf("total seats :       50\n ");
+        printf("avalible    :       50\n ");
+        printf("fare        :       %d.00\n",fare[check-1]);
+        printf("\n**********************************\n");
+    }
+        
+
     return 0;
 }
 
