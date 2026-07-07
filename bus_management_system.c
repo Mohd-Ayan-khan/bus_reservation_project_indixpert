@@ -18,6 +18,7 @@ int cencle();
 int route();
 int signup();
 int payment();
+int valid();
 
 
 
@@ -42,7 +43,12 @@ int main()
     printf("\n****************");
 
     printf("\nplese enter your choice ");
-    scanf("%d",&choice);
+    if(scanf("%d",&choice) !=1)
+    {
+        valid();
+        break;
+    }
+    else{
 
     switch (choice)
     {
@@ -66,6 +72,7 @@ int main()
         
         break;
     }
+}
 } 
 
 return 0;
@@ -73,21 +80,41 @@ return 0;
 
 int signup()
 {
+    int valid=1;
+
     printf("Enter User Name :");
     scanf("%s",&username);
     printf("Enter the Password :");
     scanf("%s",&password);
 
+   for(int i=0; username[i] !='\0';i++)
+   {
+    if(username[i] >= '0' && username[i] <= '9')
+    {
+        valid=0;
+        break;
+    }
+
+   }
+
+   if(valid == 0)
+   {
+    printf("\n\t**************************************");
+    printf("\n\t*** only alfhabate in username***");
+    printf("\n\t**************************************\n");
+   }
+   else{
     printf("\n\t**************************************");
     printf("\n\t\t*****Sign Up Complete*****");
     printf("\n\t**************************************\n");
     tag=1;
+   }
   return 0;  
 }
 
 int login()
 {
-    
+    int valid=1;
     char user[20];
     char pass[20];
     int usermatch,passmatch;
@@ -98,6 +125,26 @@ int login()
         scanf("%s",&user);
         printf("plese enter password :");
         scanf("%s",&pass);
+
+
+
+        for(int i=0; username[i] !='\0'; i++)
+        {
+            if(user[i] >='0' && user[i] <= '9')
+            {
+                valid=0;
+                break;
+            }
+
+        }
+        if(valid == 0)
+        {
+            printf("\n\t**************************************");
+            printf("\n\tonly alfhabate available in username");
+            printf("\n\t**************************************\n");
+        }
+        else
+        {
 
         usermatch=1;
         passmatch=1;
@@ -149,8 +196,8 @@ int login()
             try=1;
         }
         
-
-    }while(try==1);
+    }
+    }while(try==1 && valid != 1);
     return 0;
 }
 
@@ -174,8 +221,12 @@ do{
     printf("\n<<()|()>>******************************<<()||()>>\n");
 
     printf("\nEnter your choice :");
-    scanf("%d",&choice);
-
+    if(scanf("%d",&choice) !=1)
+    {
+        valid();
+        break;
+    }
+    else{
 
     switch (choice)
     {
@@ -207,10 +258,10 @@ do{
 
     default:
         printf("\n\t**************************************");
-        printf("\t\tPlease Enter valid number");
+        printf("\tPlease Enter valid number");
         printf("\n\t**************************************\n");
         break;
-    }
+    }}
 }while(choice != 4);
 return 0;
 }
@@ -218,14 +269,32 @@ return 0;
 
 int book()
 {
-    
     do{
         printf("\nEnter Bus Number Between (1/10): ");
-        scanf("%d",&busnum[num]);
+        if(scanf("%d",&busnum[num]) !=1)
+        {
+            valid();
+            return 0;
+        }
+        else
+        {
         printf("Enter Number of Seats :");
-        scanf("%d",&seats[num]);
+        if(scanf("%d",&seats[num]) !=1)
+        {
+            valid();
+            return 0;
+        }
+        else
+        {
+            
+        if(busnum[num] < 0 && seats[num] < 0)
+        {
+            printf("\n\t**************************************");
+            printf("\n\t**plese enter only (1/10) Or under 50 seats");
+            printf("\n\t**************************************\n");
+        }
 
-        if(seats[num] > 50 )
+        else if(seats[num] > 50 )
         {
             printf("\n\t**************************************");
             printf("\n\t\tonly 50 seats available");
@@ -244,7 +313,7 @@ int book()
             num++;
             
         }
-    }while(seats[num] > 50 && busnum[num]<1 || busnum[num]>10); 
+    }}}while(seats[num] > 50 && busnum[num]<1 || busnum[num]>10); 
         
         
  return 0;   
@@ -257,7 +326,12 @@ int cencle()
     int step=0;
 
     printf("Enter Bus Number :");
-    scanf("%d",&comp);
+    if(scanf("%d",&comp) != 1)
+    {
+        valid();
+        return 0;
+    }
+    else{
 
     for(int i=0; i<num; i++ )
     {
@@ -288,6 +362,7 @@ int cencle()
         printf("\n\t\tthis bus or Seats not booked");
         printf("\n\t**************************************\n");
     }
+}
    return 0; 
 }
 
@@ -301,10 +376,20 @@ int status()
     
 
     printf("enter bus number :");
-    scanf("%d",&check);
+    if(scanf("%d",&check) != 1)
+    {
+        valid();
+        return 0;
 
-   
+    }
+   else{
 
+    if(check < 0)
+    {
+        printf("\n\t**************************************");
+        printf("\n\t**plese enter only (1/10)");
+        printf("\n\t**************************************\n");
+    }
 
     for(int i=0; i<num; i++)
     {
@@ -326,7 +411,7 @@ int status()
         }
         
     }
-     if(num == 0)
+     if(num == 0 && check > 0)
     {
         printf("\n**********************************\n");
         printf(" Bus number  :       %d\n ",check);
@@ -337,7 +422,7 @@ int status()
         printf("fare        :       %d.00\n",fare[check-1]);
         printf("\n**********************************\n");
     }
-        
+}    
 
     return 0;
 }
@@ -368,7 +453,7 @@ int payment()
     printf("\nyour bus           %d",busnum[num]);
     printf("\nsource city        %s",source_city[index]);
     printf("\ndestination        %s",destination[index]);
-    printf("\nbooked seats       %d",seats[num]);
+    printf("\nbook seats         %d",seats[num]);
     printf("\nfare               %d",fare[index]);
     printf("\ntotal bill         %d\n",fare[index]*seats[num]);
 
@@ -381,7 +466,12 @@ int payment()
      printf("\n**************************************\n");
     
     printf("Enter your choice");
-    scanf("%d",&option);
+    if(scanf("%d",&option) !=1)
+    {
+        valid();
+        return 0;
+    }
+    else{
 
     switch (option)
     {
@@ -405,6 +495,9 @@ int payment()
         printf("\n\t**************************************");
         printf("\n\t\t*****Payment sussecfull******");
         printf("\n\t**************************************\n");
+        printf("\n\t*****************************************************************************");
+        printf("\n\t*****Successfully Booking in Bus %d of %d seats******",busnum[num],seats[num]);
+        printf("\n\t***************************************************************************\n");
         
         break;  
     case 3 : 
@@ -414,6 +507,9 @@ int payment()
         printf("\n\t**************************************");
         printf("\n\t\t*****Payment sussecfull******");
         printf("\n\t**************************************\n");
+        printf("\n\t*****************************************************************************");
+        printf("\n\t*****Successfully Booking in Bus %d of %d seats******",busnum[num],seats[num]);
+        printf("\n\t***************************************************************************\n");
 
        
     break;
@@ -422,9 +518,14 @@ int payment()
     default:printf("\n****Enter valid number******");
         break;
     }
-
+    }
 
 return 0;
 }
 
+int valid()
+{
+    printf("*** invalid ***");
+
+}
 
